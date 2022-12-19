@@ -1,0 +1,22 @@
+# Config, just variables
+CC=gcc
+CFLAGS=-Wall -g 
+LFLAGS=-lm 
+TARGET=out 
+ 
+# Generate source and object lists, also just string variables
+C_SRCS := driver.c src/functions.c
+HDRS := src/functions.h
+OBJS := driver.o src/functions.o 
+
+# default target
+all: build
+	@echo “All Done!”
+ 
+# Link all built objects 
+build: $(OBJS) 
+	$(CC) $(OBJS) -o $(TARGET) $(LFLAGS)
+
+# special build rule
+%.o: %.c $(HDRS) 
+	$(CC) $(CFLAGS) -c $< -o $@
